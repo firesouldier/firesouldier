@@ -8,7 +8,7 @@ namespace LongestSubstring
     {
         public int LengthOfLongestSubstring(string inputString)
         {
-            var charsInCurrentString = GetNewDictionary();
+            var charsInCurrentString = new Dictionary<char, int>();
 
             int lengthOfLongestStringSoFar = 0;
             for (int i = 0; i < inputString.Length; ++i)
@@ -16,7 +16,7 @@ namespace LongestSubstring
                 if (charsInCurrentString.TryGetValue(inputString[i], out int indexOfChar))
                 {
                     lengthOfLongestStringSoFar = PotentiallyUpdateLongestStringLength(charsInCurrentString, lengthOfLongestStringSoFar);
-                    charsInCurrentString = GetNewDictionary();
+                    charsInCurrentString.Clear();
                     i = indexOfChar+1;
                     charsInCurrentString.Add(inputString[i], i);
                 }
@@ -40,11 +40,6 @@ namespace LongestSubstring
                 return currentDict.Count;
             }
             return lengthOfLongestStringSoFar;
-        }
-
-        private Dictionary<char, int> GetNewDictionary()
-        {
-            return new Dictionary<char, int>();
         }
     }
 }
