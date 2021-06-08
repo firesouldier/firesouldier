@@ -28,6 +28,7 @@ namespace Tests
             Assert.AreEqual(12, _longestSubstring.LengthOfLongestSubstring("123    -'¨3qwerty:"));
             Assert.AreEqual(8, _longestSubstring.LengthOfLongestSubstring("/%3!2¤5hhffddss1123"));
             Assert.AreEqual(12, _longestSubstring.LengthOfLongestSubstring("zxcvb00?´`'-_:.;,@"));
+            Assert.AreEqual(3, _longestSubstring.LengthOfLongestSubstring("dvdf"));
         }
     }
 }

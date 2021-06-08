@@ -8,17 +8,23 @@ namespace LongestSubstring
     {
         public int LengthOfLongestSubstring(string inputString)
         {
-            var charsInCurrentString = GetNewHashSet();
+            var charsInCurrentString = GetNewDictionary();
 
             int lengthOfLongestStringSoFar = 0;
-            foreach (var character in inputString)
+            for (int i = 0; i < inputString.Length; ++i)
             {
-                if (charsInCurrentString.Contains(character))
+                if (charsInCurrentString.TryGetValue(inputString[i], out int indexOfChar))
                 {
                     lengthOfLongestStringSoFar = PotentiallyUpdateLongestStringLength(charsInCurrentString, lengthOfLongestStringSoFar);
-                    charsInCurrentString = GetNewHashSet();
+                    charsInCurrentString = GetNewDictionary();
+                    i = indexOfChar+1;
+                    charsInCurrentString.Add(inputString[i], i);
                 }
-                charsInCurrentString.Add(character);
+                else
+                {
+                    charsInCurrentString.Add(inputString[i], i);
+                }
+                
             }
 
             lengthOfLongestStringSoFar = PotentiallyUpdateLongestStringLength(charsInCurrentString, lengthOfLongestStringSoFar);
@@ -27,18 +33,18 @@ namespace LongestSubstring
             return lengthOfLongestStringSoFar;
         }
 
-        private int PotentiallyUpdateLongestStringLength(HashSet<char> currentSet, int lengthOfLongestStringSoFar)
+        private int PotentiallyUpdateLongestStringLength(Dictionary<char, int> currentDict, int lengthOfLongestStringSoFar)
         {
-            if (currentSet.Count > lengthOfLongestStringSoFar)
+            if (currentDict.Count > lengthOfLongestStringSoFar)
             {
-                return currentSet.Count;
+                return currentDict.Count;
             }
             return lengthOfLongestStringSoFar;
         }
 
-        private HashSet<char> GetNewHashSet()
+        private Dictionary<char, int> GetNewDictionary()
         {
-            return new HashSet<char>();
+            return new Dictionary<char, int>();
         }
     }
 }
