@@ -13,10 +13,11 @@ namespace Tests
             _palindromicSubstring = new PalindromicSubstring();
         }
 
-        [TestCase("babad", "bab")]
+        [TestCase("aba", "aba")]
+        [TestCase("babad", "aba")]
         [TestCase("cbbd", "bb")]
         [TestCase("a", "a")]
-        [TestCase("ac", "a")]
+        [TestCase("ac", "c")]
         [TestCase("abbaabba", "abbaabba")]
         [TestCase("sabbaabba", "abbaabba")]
         [TestCase("abbaabbas", "abbaabba")]
